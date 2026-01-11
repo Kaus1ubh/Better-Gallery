@@ -1,0 +1,57 @@
+.gallery-scroll-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+
+    // Custom Scrollbar
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    }
+}
+
+.gallery-content {
+    position: relative;
+    width: 100%;
+    // height set in JS
+}
+
+.gallery-tile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background: #111;
+    border-radius: 4px; // rounded corners for tiles
+    transition: transform 0.1s; // smooth moves if reused (optional)
+    cursor: pointer;
+
+    // Highlight on hover
+    &:hover {
+        z-index: 10;
+        // transform: scale(1.02); // Transform is controlled by inline style, this might conflict
+        box-shadow: 0 0 0 2px #646cff;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        pointer-events: none; // let clicks pass to tile
+    }
+}

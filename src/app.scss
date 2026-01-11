@@ -1,0 +1,200 @@
+@use "sass:color";
+
+// Variables
+$bg-color: #1e1e1e;
+$accent-color: #646cff;
+$text-main: #ffffff;
+$text-muted: rgba(255, 255, 255, 0.6);
+$border-color: rgba(255, 255, 255, 0.1);
+
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $bg-color;
+    color: $text-main;
+    font-family: 'Segoe UI', Inter, sans-serif;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.main-content {
+    width: 100%;
+    height: 100%;
+    position: absolute; // Full screen behind everything
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    .empty-state {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $text-muted;
+        gap: 1rem;
+        user-select: none;
+
+        .icon {
+            font-size: 3rem;
+        }
+
+        .btn-large {
+            padding: 0.8rem 2rem;
+            background-color: $accent-color;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+
+            &:hover {
+                transform: scale(1.05);
+                background-color: color.adjust($accent-color, $lightness: 5%);
+            }
+        }
+    }
+}
+
+// Bottom Interaction Zone (Invisible target)
+.bottom-interaction-zone {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; // Hover area height
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; // let clicks pass through mostly
+
+    // But re-enable pointer events on the pill itself
+    &:hover {
+        pointer-events: auto;
+    }
+}
+
+.bottom-pill {
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+
+    // Animation
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: auto; // Clickable
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(-10px); // Pop up slightly
+    }
+
+    .pill-left {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .pill-right {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .app-logo {
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        object-fit: cover;
+    }
+
+    .app-title-clean {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #fff;
+        opacity: 0.9;
+        letter-spacing: 0.5px;
+    }
+
+    .divider {
+        width: 1px;
+        height: 16px;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-pill {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    .pill-path {
+        font-size: 0.75rem;
+        color: $text-muted;
+        font-family: monospace;
+    }
+
+    .label {
+        font-size: 0.75rem;
+        color: $text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .zoom-slider {
+        width: 100px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        appearance: none;
+        outline: none;
+
+        &::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+    }
+}
