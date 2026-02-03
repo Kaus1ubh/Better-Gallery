@@ -22,8 +22,9 @@ function App() {
             const removeListener = window.ipcRenderer.on('scan:progress', (_event: any, data) => {
                 useGalleryStore.setState({ scanProgress: data })
             })
-            // return removeListener // depends on implementation, safer to ignore for now if uncertain
+            return removeListener
         }
+        return undefined
     }, [])
 
     const handleOpenFolder = async () => {

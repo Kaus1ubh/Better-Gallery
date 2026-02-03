@@ -15,6 +15,7 @@ interface GalleryState {
     // Paging
     currentPage: number
     setPage: (page: number) => void
+    appendImages: (images: ImageItem[]) => void
 
     // Actions
     scanLibrary: (path: string) => Promise<void>
@@ -32,7 +33,6 @@ export const useGalleryStore = create<GalleryState>((set) => ({
     setProgress: (scanProgress) => set({ scanProgress }),
     setRootPath: (rootPath) => set({ rootPath }),
 
-    currentPage: 0,
     currentPage: 0,
     setPage: (currentPage) => set({ currentPage }),
 
